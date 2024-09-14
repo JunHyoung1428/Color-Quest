@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TransitionMaterial
+  m_Name: BackGroundMaterial
   m_Shader: {fileID: -6465566751694194690, guid: c070f13583f4b2e4fae2d0c8b7c7f4cb,
     type: 3}
   m_Parent: {fileID: 0}
@@ -133,12 +133,12 @@ Material:
     - _transitionProgress: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BasicColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BasicColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1.5157166, g: 1.5157166, b: 1.5157166, a: 1}
+    - _EmissionColor: {r: 3.1645749, g: 3.1645749, b: 3.1645749, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SpreadColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpreadColor: {r: 0.49056602, g: 0.488252, b: 0.488252, a: 1}
     - _endColor: {r: 0.028301895, g: 0.028301895, b: 0.028301895, a: 0}
     - _startColor: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

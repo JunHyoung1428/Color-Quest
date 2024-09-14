@@ -32,21 +32,26 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         panelCount = panels.Count;
+
+        foreach(var panel in panels)
+        {
+            panel.OnPanelClicked = OnPanelClicked;
+        }
     }
 
     /**********************************************
     *                   Methods
     ***********************************************/
 
+    [ContextMenu("NextLevel")]
     void NextLevel()
     {
         ++gameLevel;
         answerIndex = Random.Range(0, panelCount);
-        for(int i = 0; i < panelCount; i++)
+        Color newColor = Random.ColorHSV();
+        Color wrongColor = GenerateDifferentColor(newColor, 0.1f);
+        for (int i = 0; i < panelCount; i++)
         {
-            Color newColor = Random.ColorHSV();
-            Color wrongColor = GenerateDifferentColor(newColor, 0.1f);
-
             if (i != answerIndex)
             {
                 panels[i].NextStage(newColor);
@@ -67,6 +72,19 @@ public class GameManager : MonoBehaviour
         float newHue = (h + hueDiff) % 1f;
 
         return Color.HSVToRGB(newHue, s, v);
+    }
+
+    private void OnPanelClicked(bool isAnswer)
+    {
+        if (isAnswer)
+        {
+            Debug.Log("Correct!");
+            NextLevel();
+        }
+        else
+        {
+            Debug.Log("Wrong Panel Clicked");
+        }
     }
 
 

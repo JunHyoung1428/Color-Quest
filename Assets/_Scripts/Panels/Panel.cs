@@ -11,7 +11,7 @@ public class Panel : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] PanelTransition transition;
 
-    public Action<bool> OnPanelCliked;
+    public Action<bool> OnPanelClicked;
 
     /**********************************************
     *                 Unity Events
@@ -36,9 +36,9 @@ public class Panel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(OnPanelCliked != null)
+        if(OnPanelClicked != null)
         {
-            OnPanelCliked(isAnswer);
+            OnPanelClicked(isAnswer);
         }
     }
 
