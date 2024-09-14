@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PanelTransition : MonoBehaviour
 {
     [SerializeField] Image img;
+    Material mat; 
 
     [Space(10), SerializeField] Color spreadColor;
     [SerializeField] Color basicColor;
@@ -23,7 +24,11 @@ public class PanelTransition : MonoBehaviour
      *                 Unity Events
      ***********************************************/
 
-
+    private void Start()
+    {
+        mat = new Material(img.material); // 인스턴싱 안하면 게임뷰에서는 안보임...
+        img.material = mat;
+    }
 
 
     /**********************************************
@@ -64,8 +69,8 @@ public class PanelTransition : MonoBehaviour
 
     IEnumerator TransitionCoroutine()
     {
-        img.material.SetColor(_SpreadColor, spreadColor);
-        img.material.SetColor(_BasicColor, basicColor);
+        mat.SetColor(_SpreadColor, spreadColor);
+        mat.SetColor(_BasicColor, basicColor);
 
         isTransitioning = true;
         transitionProgress = 0f;
@@ -73,11 +78,11 @@ public class PanelTransition : MonoBehaviour
         while (transitionProgress < 1f)
         {
             transitionProgress += Time.deltaTime * transitionSpeed;
-            img.material.SetFloat(_TransitionProgress, transitionProgress);
+            mat.SetFloat(_TransitionProgress, transitionProgress);
             yield return null;
         }
 
-        img.material.SetFloat(_TransitionProgress, 1f);
+        mat.SetFloat(_TransitionProgress, 1f);
         isTransitioning = false;
     }
 
