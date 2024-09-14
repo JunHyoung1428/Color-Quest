@@ -7,8 +7,8 @@ public class PanelTransition : MonoBehaviour
     [SerializeField] Image img;
     Material mat; 
 
-    [Space(10), SerializeField] Color spreadColor;
-    [SerializeField] Color basicColor;
+    [Space(10), SerializeField] Color basicColor;
+    [SerializeField] Color spreadColor;
 
     private float transitionProgress = 0f;
     public float transitionSpeed = 1f;
@@ -32,7 +32,7 @@ public class PanelTransition : MonoBehaviour
 
 
     /**********************************************
-    *                 Methods
+    *                Test Methods
     ***********************************************/
 
     [ContextMenu("Transition10")]
@@ -46,25 +46,26 @@ public class PanelTransition : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            StartTransition();
+            StartTransition(Random.ColorHSV());
             yield return new WaitForSeconds(1f);
         }
     }
 
+
+    /**********************************************
+    *                Methods
+    ***********************************************/
+
     [ContextMenu("Transition")]
-    public void StartTransition()
+    public void StartTransition(Color color)
     {
-        SetRandomColor();
+        basicColor = spreadColor;
+        spreadColor = color;
+
         if (!isTransitioning)
         {
             StartCoroutine(TransitionCoroutine());
         }
-    }
-
-    void SetRandomColor()
-    {
-        spreadColor = basicColor;
-        basicColor = Random.ColorHSV();
     }
 
     IEnumerator TransitionCoroutine()
@@ -85,5 +86,4 @@ public class PanelTransition : MonoBehaviour
         mat.SetFloat(_TransitionProgress, 1f);
         isTransitioning = false;
     }
-
 }
