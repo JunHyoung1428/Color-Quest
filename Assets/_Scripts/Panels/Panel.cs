@@ -22,10 +22,16 @@ public class Panel : MonoBehaviour, IPointerClickHandler
     *                Methods
     ***********************************************/
 
-    public void NextStage(Color color, bool isAnswer=false)
+    public void SetPanel(Color color, bool isAnswer=false)
     {
         this.isAnswer = isAnswer;
 
+#if UNITY_EDITOR
+        if (isAnswer)
+            gameObject.name = "Answer";
+        else
+            gameObject.name = "Panel";
+#endif
         transition.StartTransition(color);
     }
 

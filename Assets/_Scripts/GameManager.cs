@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour
         {
             if (i != answerIndex)
             {
-                panels[i].NextStage(newColor);
+                panels[i].SetPanel(newColor);
             }
             else
             {
-                panels[i].NextStage(wrongColor,true);
+                panels[i].SetPanel(wrongColor,true);
             }
 
         }
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
             Color newColor = Random.ColorHSV();
             foreach (Panel panel in panels){
 
-                panel.NextStage(newColor);
+                panel.SetPanel(newColor);
             }
             yield return new WaitForSeconds(1f);
         }
