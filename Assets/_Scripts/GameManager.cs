@@ -39,6 +39,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        NextLevel();
+    }
+
     /**********************************************
     *                   Methods
     ***********************************************/
@@ -48,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         ++gameLevel;
         answerIndex = Random.Range(0, panelCount);
-        Color newColor = Random.ColorHSV();
+        Color newColor = Random.ColorHSV(0, 1, 0.5f, 1f, 0.8f, 1f);
         Color wrongColor = GenerateDifferentColor(newColor, 0.1f);
         for (int i = 0; i < panelCount; i++)
         {
