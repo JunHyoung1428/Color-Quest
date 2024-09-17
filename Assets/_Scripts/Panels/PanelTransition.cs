@@ -24,7 +24,7 @@ public class PanelTransition : MonoBehaviour
      *                 Unity Events
      ***********************************************/
 
-    private void Start()
+    private void Awake()
     {
         mat = new Material(img.material); // 인스턴싱 안하면 게임뷰에서는 안보임...
         img.material = mat;
