@@ -1,17 +1,27 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     [SerializeField] List<Panel> panels = new List<Panel>();
+
+    [SerializeField] Volume postProcessing;
+    Vignette vignette;
+
+    [SerializeField] CinemachineImpulseSource impulseSource;
+
+
     int panelCount = 0;
     int answerIndex = 0;
 
-    [SerializeField] int gameLevel = 0;
+    public int gameLevel = 0;
 
     /**********************************************
     *                 Unity Events
@@ -41,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        postProcessing.profile.TryGet(out vignette);
         NextLevel();
     }
 
@@ -54,16 +65,16 @@ public class GameManager : MonoBehaviour
         ++gameLevel;
         answerIndex = Random.Range(0, panelCount);
         Color newColor = Random.ColorHSV(0, 1, 0.5f, 1f, 0.8f, 1f);
-        Color wrongColor = GenerateDifferentColor(newColor, 0.1f);
+        Color diffColor = GenerateDifferentColor(newColor, 0.1f);
         for (int i = 0; i < panelCount; i++)
         {
-            if (i != answerIndex)
+            if (i == answerIndex)
             {
-                panels[i].SetPanel(newColor);
+                panels[i].SetPanel(diffColor,true);
             }
             else
             {
-                panels[i].SetPanel(wrongColor,true);
+                panels[i].SetPanel(newColor);
             }
 
         }
@@ -88,30 +99,43 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            StartCoroutine(WrongPanelClickRoutine());
             Debug.Log("Wrong Panel Clicked");
         }
     }
 
 
-    [ContextMenu("Transition10")]
-    void TransitionTest()
+    Coroutine worngRoutine;
+    IEnumerator WrongPanelClickRoutine()
     {
-        StartCoroutine(TestStartTransition());
-    }
+        float durationUp = 0.50f;
+        float durationDown = 0.25f;
+        float maxIntensity = 0.3f;
+
+        vignette.active = true;
+        float elapsedTime = 0f;
+        impulseSource.GenerateImpulseWithForce(5f);
 
 
-    IEnumerator TestStartTransition()
-    {
-        for (int i = 0; i < 10; i++)
+        while (elapsedTime < durationUp)
         {
-            Color newColor = Random.ColorHSV();
-            foreach (Panel panel in panels){
-
-                panel.SetPanel(newColor);
-            }
-            yield return new WaitForSeconds(1f);
+            elapsedTime += Time.deltaTime;
+            vignette.intensity.value = Mathf.Lerp(0f, maxIntensity, elapsedTime / durationUp);
+            yield return null;
         }
-    }
 
+        vignette.intensity.value = maxIntensity;
+
+        elapsedTime = 0f;
+        while (elapsedTime < durationDown)
+        {
+            elapsedTime += Time.deltaTime;
+            vignette.intensity.value = Mathf.Lerp(maxIntensity, 0f, elapsedTime / durationDown);
+            yield return null;
+        }
+
+        vignette.intensity.value = 0f;
+        vignette.active = false;
+    }
 
 }
