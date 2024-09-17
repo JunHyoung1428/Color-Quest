@@ -14,7 +14,7 @@ public class PanelTransition : MonoBehaviour
     public float transitionSpeed = 1f;
     
    
-    bool isTransitioning = false;
+    public bool isTransitioning = false;
 
     readonly string _SpreadColor = "_SpreadColor";
     readonly string _BasicColor = "_BasicColor";
@@ -68,6 +68,17 @@ public class PanelTransition : MonoBehaviour
         }
     }
 
+    public void ReverseTransition(Color color)
+    {
+        basicColor = spreadColor;
+        spreadColor = color;
+
+        if (!isTransitioning)
+        {
+            StartCoroutine(ReverseTransition());
+        }
+    }
+
     IEnumerator TransitionCoroutine()
     {
         mat.SetColor(_SpreadColor, spreadColor);
@@ -76,7 +87,7 @@ public class PanelTransition : MonoBehaviour
         isTransitioning = true;
         transitionProgress = 0f;
 
-        while (transitionProgress < 1f)
+        while (transitionProgress < 0.5f)
         {
             transitionProgress += Time.deltaTime * transitionSpeed;
             mat.SetFloat(_TransitionProgress, transitionProgress);
@@ -84,6 +95,26 @@ public class PanelTransition : MonoBehaviour
         }
 
         mat.SetFloat(_TransitionProgress, 1f);
+        isTransitioning = false;
+    }
+
+
+    IEnumerator ReverseTransition()
+    {
+        mat.SetColor(_SpreadColor, basicColor);
+        mat.SetColor(_BasicColor, spreadColor);
+
+        isTransitioning = true;
+        transitionProgress = 0.5f;
+
+        while (transitionProgress > 0f)
+        {
+            transitionProgress -= Time.deltaTime * transitionSpeed;
+            mat.SetFloat(_TransitionProgress, transitionProgress);
+            yield return null;
+        }
+
+        mat.SetFloat(_TransitionProgress, 0f);
         isTransitioning = false;
     }
 }

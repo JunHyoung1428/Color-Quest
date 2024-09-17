@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public class Panel : MonoBehaviour, IPointerClickHandler
 {
-    public bool isAnswer;
+    public bool isAnswer=false;
 
     [SerializeField] PanelTransition transition;
 
@@ -32,7 +32,10 @@ public class Panel : MonoBehaviour, IPointerClickHandler
         else
             gameObject.name = "Panel";
 #endif
-        transition.StartTransition(color);
+        if(GameManager.Instance.gameLevel %2 == 0)
+            transition.ReverseTransition(color);
+        else
+            transition.StartTransition(color);
     }
 
 
@@ -42,6 +45,9 @@ public class Panel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (transition.isTransitioning)
+            return;
+
         if(OnPanelClicked != null)
         {
             OnPanelClicked(isAnswer);
