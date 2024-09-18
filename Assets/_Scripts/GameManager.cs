@@ -1,26 +1,28 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] GridLayoutGroup grid; // girdLayout 
+    [SerializeField] Panel panel; // Panel Prefab;
     [SerializeField] List<Panel> panels = new List<Panel>();
 
     [SerializeField] Volume postProcessing;
     Vignette vignette;
 
     [SerializeField] CinemachineImpulseSource impulseSource;
+    
 
-
-    int panelCount = 0;
     int answerIndex = 0;
 
+    int gameStage=1;
     public int gameLevel = 0;
 
     /**********************************************
@@ -41,11 +43,10 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        panelCount = panels.Count;
 
         foreach(var panel in panels)
         {
-            panel.OnPanelClicked = OnPanelClicked;
+            panel.OnPanelClicked += OnPanelClicked;
         }
     }
 
@@ -63,10 +64,15 @@ public class GameManager : MonoBehaviour
     void NextLevel()
     {
         ++gameLevel;
-        answerIndex = Random.Range(0, panelCount);
+
+        if(gameLevel %10 == 0 && gameStage <3)
+            GrowGrid();
+        
+
+        answerIndex = Random.Range(0, panels.Count);
         Color newColor = Random.ColorHSV(0, 1, 0.5f, 1f, 0.8f, 1f);
         Color diffColor = GenerateDifferentColor(newColor, 0.1f);
-        for (int i = 0; i < panelCount; i++)
+        for (int i = 0; i < panels.Count; i++)
         {
             if (i == answerIndex)
             {
@@ -76,8 +82,27 @@ public class GameManager : MonoBehaviour
             {
                 panels[i].SetPanel(newColor);
             }
-
         }
+    }
+
+    /// <summary>
+    /// Adding more panel to Gird
+    /// </summary>
+    [ContextMenu("NextStage")]
+    void GrowGrid()
+    {
+        ++gameStage;
+        grid.constraintCount++;
+        int iterate = (grid.constraintCount * grid.constraintCount) - panels.Count; 
+
+        for(int i=0; i < iterate; i++)
+        {
+            Panel newPanel = Instantiate(panel, grid.transform);
+            newPanel.OnPanelClicked += OnPanelClicked;
+            panels.Add(newPanel);
+        }
+
+        grid.cellSize = grid.cellSize * 0.8f;
     }
 
     Color GenerateDifferentColor(Color color, float hueDiff)
@@ -103,9 +128,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Wrong Panel Clicked");
         }
     }
-
-
-    Coroutine worngRoutine;
     IEnumerator WrongPanelClickRoutine()
     {
         float durationUp = 0.50f;
