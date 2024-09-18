@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-
         foreach(var panel in panels)
         {
             panel.OnPanelClicked += OnPanelClicked;
@@ -53,12 +52,21 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         postProcessing.profile.TryGet(out vignette);
-        NextLevel();
+        InitPanels();
     }
 
     /**********************************************
     *                   Methods
     ***********************************************/
+
+
+    void InitPanels()
+    {
+        if (gameLevel != 0)
+            return;
+        StartCoroutine(ActivePanelSequence());
+    }
+
 
     [ContextMenu("NextLevel")]
     void NextLevel()
@@ -115,6 +123,10 @@ public class GameManager : MonoBehaviour
         return Color.HSVToRGB(newHue, s, v);
     }
 
+    /**********************************************
+    *               Event Process
+    ***********************************************/
+
     private void OnPanelClicked(bool isAnswer)
     {
         if (isAnswer)
@@ -128,6 +140,25 @@ public class GameManager : MonoBehaviour
             Debug.Log("Wrong Panel Clicked");
         }
     }
+
+
+    /**********************************************
+    *                Routines
+    ***********************************************/
+
+    IEnumerator ActivePanelSequence()
+    {
+        foreach (int i in panels.RandomIndex())
+        {
+            panels[i].SetPanel(Color.white);
+            yield return new WaitForSeconds(Random.Range(0.02f, 0.1f));
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        NextLevel();
+    }
+
     IEnumerator WrongPanelClickRoutine()
     {
         float durationUp = 0.50f;
