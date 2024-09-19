@@ -148,13 +148,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ActivePanelSequence()
     {
+        float terms = 0f;
         foreach (int i in panels.RandomIndex())
         {
             panels[i].SetPanel(Color.white);
-            yield return new WaitForSeconds(Random.Range(0.02f, 0.1f));
+            float term = Random.Range(0.02f, 0.1f);
+            terms += term;
+            yield return new WaitForSeconds(term);
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(terms);
 
         NextLevel();
     }
