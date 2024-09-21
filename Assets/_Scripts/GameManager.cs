@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         ++gameLevel;
 
+        //if(gameLevel==2)
         if(gameLevel %10 == 0 && gameStage <3)
             GrowGrid();
         
