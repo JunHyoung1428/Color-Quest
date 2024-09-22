@@ -10,16 +10,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [Header("Game Objects")]
     [SerializeField] GridLayoutGroup grid; // girdLayout 
     [SerializeField] Panel panel; // Panel Prefab;
     [SerializeField] List<Panel> panels = new List<Panel>();
 
+    [SerializeField] GameTimer timer;
+    [SerializeField] GameObject gameOverText; //임시
+
+    [Space(5),Header("Effects")]
     [SerializeField] Volume postProcessing;
     Vignette vignette;
 
     [SerializeField] CinemachineImpulseSource impulseSource;
-    
 
+    float increaseTime = 2f;
+    float decreaseTime = 3f;
     int answerIndex = 0;
 
     int gameStage=1;
@@ -133,13 +139,21 @@ public class GameManager : MonoBehaviour
         if (isAnswer)
         {
             Debug.Log("Correct!");
+            timer.Increase(increaseTime);
             NextLevel();
         }
         else
         {
             StartCoroutine(WrongPanelClickRoutine());
+            timer.Decrease(decreaseTime);
             Debug.Log("Wrong Panel Clicked");
         }
+    }
+
+    // 타이머 끝났을때, 게임오버 처리
+    void OnTimerFinished()
+    {
+        gameOverText.SetActive(true);
     }
 
 
@@ -159,10 +173,12 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(terms);
-
+        timer.ResetTimer();
+        timer.TimerFinish += OnTimerFinished;
         NextLevel();
     }
 
+    //todo : 특수효과같은거 따로 처리하는 스크립트 만들어서 옮기자
     IEnumerator WrongPanelClickRoutine()
     {
         float durationUp = 0.50f;
