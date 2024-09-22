@@ -6,30 +6,70 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
+    [SerializeField] float totalTime = 10f; //Total Game Play Time
+    float remainTime;
+    float inverseTotalTime; // (1/totalTime)
+
     [SerializeField] Slider[] sliders;
+
 
     public event Action TimerFinish;
 
-    public void StartTimer()
-    {
+    /**********************************************
+    *                 Unity Events
+    ***********************************************/
 
+    private void Update()
+    {
+        if(remainTime > 0)
+        {
+            remainTime -= Time.deltaTime;
+            UpdateTimer();
+        }
+        else
+        {
+            TimerFinish?.Invoke();
+            TimerFinish = null;
+        }
     }
 
-    IEnumerator TimerRoutine()
-    {
+    /**********************************************
+    *                   Methods
+    ***********************************************/
 
-        yield return null;
+    // Called From GameManager's ActivePanelSequence
+    public void ResetTimer()
+    {
+        remainTime = totalTime;
+        inverseTotalTime = 1 / totalTime;
+
+        foreach(var timer in sliders)
+        {
+            timer.value = 1.0f;
+        }
     }
 
-
-    public void Damaged()
+    void UpdateTimer()
     {
-        
+        float sliderValue = remainTime * inverseTotalTime;
+
+        for (int i = 0; i < sliders.Length; i++)
+        {
+            sliders[i].value = sliderValue;
+        }
     }
 
-    public void Heal()
+   
+    public void Decrease(float val)
     {
+        remainTime -= val;
+        UpdateTimer();
+    }
 
+    public void Increase(float val)
+    {
+        remainTime += val;
+        UpdateTimer();
     }
 
 }

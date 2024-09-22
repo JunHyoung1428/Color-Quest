@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 621431639}
   - component: {fileID: 621431640}
   m_Layer: 6
-  m_Name: Slider
+  m_Name: Slider (B)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1190,7 +1190,7 @@ GameObject:
   - component: {fileID: 1006089608}
   - component: {fileID: 1006089609}
   m_Layer: 6
-  m_Name: Slider (1)
+  m_Name: Slider (T)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1351,7 +1351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1267683226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1576,6 +1576,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAnswer: 0
   transition: {fileID: 1326581704}
+--- !u!1 &1411744397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1411744398}
+  - component: {fileID: 1411744399}
+  m_Layer: 6
+  m_Name: GameTimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1411744398
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411744397}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1630241265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1411744399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411744397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc01caada5bbe749b0c37396ad3df17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalTime: 15
+  sliders:
+  - {fileID: 1006089609}
+  - {fileID: 621431640}
 --- !u!1 &1534690104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,7 +2005,7 @@ GameObject:
   - component: {fileID: 1630241263}
   - component: {fileID: 1630241262}
   m_Layer: 6
-  m_Name: SliderCanvas
+  m_Name: TimerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2034,6 +2086,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1411744398}
   - {fileID: 1006089608}
   - {fileID: 621431639}
   m_Father: {fileID: 0}
@@ -2388,6 +2441,8 @@ MonoBehaviour:
   - {fileID: 1590530148}
   - {fileID: 404063930}
   - {fileID: 393600199}
+  timer: {fileID: 1411744399}
+  gameOverText: {fileID: 1267683225}
   postProcessing: {fileID: 829692254}
   impulseSource: {fileID: 1844436800}
   gameLevel: 0
