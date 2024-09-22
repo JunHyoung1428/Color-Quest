@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Game Objects")]
+    [SerializeField] GraphicRaycaster panelsRaycaster;
     [SerializeField] GridLayoutGroup grid; // girdLayout 
     [SerializeField] Panel panel; // Panel Prefab;
     [SerializeField] List<Panel> panels = new List<Panel>();
@@ -24,8 +25,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] CinemachineImpulseSource impulseSource;
 
-    float increaseTime = 2f;
-    float decreaseTime = 3f;
+    float increaseTime = 1f;
+    float decreaseTime = 1f;
     int answerIndex = 0;
 
     int gameStage=1;
@@ -153,6 +154,7 @@ public class GameManager : MonoBehaviour
     // 타이머 끝났을때, 게임오버 처리
     void OnTimerFinished()
     {
+        panelsRaycaster.enabled = false;  
         gameOverText.SetActive(true);
     }
 

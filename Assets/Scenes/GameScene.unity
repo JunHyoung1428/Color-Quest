@@ -1624,7 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc01caada5bbe749b0c37396ad3df17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 15
+  totalTime: 5
   sliders:
   - {fileID: 1006089609}
   - {fileID: 621431640}
@@ -2429,6 +2429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28bb853195f8a194fac2409c0ea8a05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelsRaycaster: {fileID: 881344793}
   grid: {fileID: 1534690106}
   panel: {fileID: 692606770754037884, guid: d2f1372b29c14fb42aaba486606a60e7, type: 3}
   panels:

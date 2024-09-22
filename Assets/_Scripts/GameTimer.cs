@@ -29,6 +29,10 @@ public class GameTimer : MonoBehaviour
         else
         {
             TimerFinish?.Invoke();
+            foreach(var timer in sliders)
+            {
+                timer.gameObject.SetActive(false);
+            }
             TimerFinish = null;
         }
     }
@@ -45,6 +49,7 @@ public class GameTimer : MonoBehaviour
 
         foreach(var timer in sliders)
         {
+            timer.gameObject.SetActive(true);
             timer.value = 1.0f;
         }
     }
