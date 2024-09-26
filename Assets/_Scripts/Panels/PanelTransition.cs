@@ -26,7 +26,7 @@ public class PanelTransition : MonoBehaviour
 
     private void Awake()
     {
-        mat = new Material(img.material); // 인스턴싱 안하면 게임뷰에서는 안보임...
+        mat = new Material(img.material); // TO Do optimize
         img.material = mat;
     }
 

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Panel : MonoBehaviour, IPointerClickHandler
 {
     public bool isAnswer=false;
 
+    [SerializeField] Image img;
     [SerializeField] PanelTransition transition;
 
     public Action<bool> OnPanelClicked;
@@ -21,6 +23,11 @@ public class Panel : MonoBehaviour, IPointerClickHandler
     /**********************************************
     *                Methods
     ***********************************************/
+
+    public void SetPanel(Material material)
+    {
+        img.material = material;
+    }
 
     public void SetPanel(Color color, bool isAnswer=false)
     {

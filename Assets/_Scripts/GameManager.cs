@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameTimer timer;
     [SerializeField] GameObject gameOverText; //юс╫ц
 
+    [SerializeField] GameOverSequences gameOverSequences;
+
     [Space(5),Header("Effects")]
     [SerializeField] Volume postProcessing;
     Vignette vignette;
@@ -156,6 +158,7 @@ public class GameManager : MonoBehaviour
     {
         panelsRaycaster.enabled = false;  
         gameOverText.SetActive(true);
+        StartCoroutine(gameOverSequences.WithScreenNoise(panels));
     }
 
 

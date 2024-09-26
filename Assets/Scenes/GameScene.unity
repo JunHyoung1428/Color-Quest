@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 146621505}
   transition: {fileID: 146621504}
 --- !u!1 &248806144
 GameObject:
@@ -338,6 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 248806147}
   transition: {fileID: 248806146}
 --- !u!1 &290414807
 GameObject:
@@ -403,6 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 393600201}
   transition: {fileID: 393600200}
 --- !u!114 &393600200
 MonoBehaviour:
@@ -585,6 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 404063928}
   transition: {fileID: 404063927}
 --- !u!1 &585746573
 GameObject:
@@ -1070,6 +1074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 931005128}
   transition: {fileID: 931005127}
 --- !u!1 &977302593
 GameObject:
@@ -1178,6 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 977302596}
   transition: {fileID: 977302595}
 --- !u!1 &1006089607
 GameObject:
@@ -1385,7 +1391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1575,6 +1581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 1326581705}
   transition: {fileID: 1326581704}
 --- !u!1 &1411744397
 GameObject:
@@ -1827,6 +1834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 1590530146}
   transition: {fileID: 1590530145}
 --- !u!1 &1594418198
 GameObject:
@@ -2395,6 +2403,7 @@ GameObject:
   - component: {fileID: 1844436798}
   - component: {fileID: 1844436799}
   - component: {fileID: 1844436800}
+  - component: {fileID: 1844436801}
   m_Layer: 0
   m_Name: GameMangaer
   m_TagString: Untagged
@@ -2444,6 +2453,7 @@ MonoBehaviour:
   - {fileID: 393600199}
   timer: {fileID: 1411744399}
   gameOverText: {fileID: 1267683225}
+  gameOverSequences: {fileID: 1844436801}
   postProcessing: {fileID: 829692254}
   impulseSource: {fileID: 1844436800}
   gameLevel: 0
@@ -2500,6 +2510,20 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &1844436801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844436797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7ceb0c2058fd9409ca0102506a2462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseMat: {fileID: -876546973899608171, guid: 1d68e2e366e4b0344a480bf9ebe22ec9,
+    type: 3}
 --- !u!1 &1877602301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,6 +2714,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7e80b4a10e5264495118e3d213664a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1900541447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 391661840843259529, guid: d2f1372b29c14fb42aaba486606a60e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3232753041168819941}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2098194278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,6 +2809,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534690105}
     m_Modifications:
+    - target: {fileID: 391661840843259529, guid: d2f1372b29c14fb42aaba486606a60e7,
+        type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 391661840843259529, guid: d2f1372b29c14fb42aaba486606a60e7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 391661840843259529, guid: d2f1372b29c14fb42aaba486606a60e7,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 9bbf5a04317719e44bfeb253b473df01, type: 2}
+    - target: {fileID: 692606770754037884, guid: d2f1372b29c14fb42aaba486606a60e7,
+        type: 3}
+      propertyPath: img
+      value: 
+      objectReference: {fileID: 1900541447}
     - target: {fileID: 1858333170462176446, guid: d2f1372b29c14fb42aaba486606a60e7,
         type: 3}
       propertyPath: m_Pivot.x

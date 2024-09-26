@@ -107,4 +107,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAnswer: 0
+  img: {fileID: 391661840843259529}
   transition: {fileID: 6763765315655427871}
